@@ -7,7 +7,7 @@ public class SimpleService {
 
     public String srv1(String arg) throws Exception{
         if(arg == null || arg.equals("")){
-            throw new NullPointerException("SimpleService serv1 参数不能为空");
+            throw new NullPointerException("SimpleService serv1 : The arg cannot be null");
         }
 
         /**
