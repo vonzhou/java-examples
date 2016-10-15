@@ -75,6 +75,24 @@ public class SimpleController {
         }
     }
 
+    @RequestMapping("/orders/{id}")
+    @ResponseBody
+    public GenericReturnObject test1(@PathVariable long id) throws Exception{
+        GenericReturnObject gro = new GenericReturnObject();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", simpleService.srv2(id));
+        gro.setData(map);
+        gro.setSucceed(true);
+        gro.setMsg("some message");
+
+        return gro;
+    }
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Request Resource Not Found")
+    public void handleOtherException(){
+
+    }
+
     @RequestMapping("/hello")
     @MyAnnotation
     public String demo(HttpServletRequest request, HttpServletResponse response){

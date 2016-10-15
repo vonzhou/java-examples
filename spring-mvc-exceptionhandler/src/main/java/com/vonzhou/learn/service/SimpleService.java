@@ -26,4 +26,12 @@ public class SimpleService {
 
         return "Right Data";
     }
+
+    public String srv2(long id) throws Exception{
+        if(id == 1){
+            throw new OrderNotFoundException("Not Found Order");
+        }
+
+        return " srv2 result";
+    }
 }

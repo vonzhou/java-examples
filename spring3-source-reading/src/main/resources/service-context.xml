@@ -6,4 +6,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="foo" class="com.vonzhou.learn.spring.beanloading.Foo"/>
+    <bean id="car" class="com.vonzhou.learn.spring.beanloading.CarFactoryBean">
+        <property name="carInfo" value="BMW,80,50"/>
+    </bean>
+
 </beans>
