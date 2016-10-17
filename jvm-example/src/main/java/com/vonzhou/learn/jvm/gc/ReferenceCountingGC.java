@@ -1,4 +1,4 @@
-package com.vonzhou.learn.jvm.chapter3;
+package com.vonzhou.learn.jvm.gc;
 
 public class ReferenceCountingGC {
 	public Object instance = null;

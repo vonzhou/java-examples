@@ -11,10 +11,10 @@ public class TracingScript{
 	)
 	
 	public static void func(@Self jvm.chapter4.BTraceTest instance,int a,int b,@Return int result){
-		println("µ÷ÓÃ¶ÑÕ»£º");
+		println("è°ƒç”¨å †æ ˆï¼š");
 		jstack();
-		println(strcat("·½·¨²ÎÊıA£º",str(a)));
-		println(strcat("·½·¨²ÎÊıB£º",str(b)));
-		println(strcat("·½·¨½á¹û£º",str(result)));
+		println(strcat("æ–¹æ³•å‚æ•°Aï¼š",str(a)));
+		println(strcat("æ–¹æ³•å‚æ•°Bï¼š",str(b)));
+		println(strcat("æ–¹æ³•ç»“æœï¼š",str(result)));
 	}
 }

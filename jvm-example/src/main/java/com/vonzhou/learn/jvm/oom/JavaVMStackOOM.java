@@ -1,7 +1,8 @@
 package com.vonzhou.learn.jvm.oom;
 
-// P55
-// -Xss2M
+/** P55
+ * -Xss2M
+ */
 public class JavaVMStackOOM {
 	private void donotStop(){
 		while(true){
@@ -12,7 +13,6 @@ public class JavaVMStackOOM {
 	public void stackLeakByThread(){
 		while(true){
 			Thread thread = new Thread(new Runnable() {
-				@Override
 				public void run() {
 					donotStop();
 				}
