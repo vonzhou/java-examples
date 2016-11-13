@@ -32,9 +32,10 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
         logger.info("Will call " + handler.toString());
 
 
-//        response.getWriter().println(" --- From Interceptor, you are rejected.");
+        response.getWriter().println(" --- From Interceptor, you are rejected.");
+        response.flushBuffer();
 
-        return true;
+        return false;
     }
 
     @Override

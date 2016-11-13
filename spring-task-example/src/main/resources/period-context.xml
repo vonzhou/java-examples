@@ -11,6 +11,8 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		">
 
+    <context:property-placeholder location="classpath*:*.properties" />
+
     <task:scheduler id="scheduler" pool-size="10"/>
     <task:executor id="executor" pool-size="10"/>
     <task:annotation-driven scheduler="scheduler" executor="executor"/>
@@ -18,9 +20,10 @@
     <bean id="periodicTask" class="com.vonzhou.learn.PeriodicTask"/>
 
     <task:scheduled-tasks scheduler="scheduler">
-        <task:scheduled ref="periodicTask" method="execute" fixed-rate="60000"/>
-        <task:scheduled ref="periodicTask" method="execute" fixed-delay="60000"/>
-        <task:scheduled ref="periodicTask" method="execute" cron="*/5 * * * * ?"/>
+        <!--<task:scheduled ref="periodicTask" method="execute" fixed-rate="60000"/>-->
+        <!--<task:scheduled ref="periodicTask" method="execute" fixed-delay="60000"/>-->
+        <!--<task:scheduled ref="periodicTask" method="execute" cron="0 06 17 * * ?"/>-->
+        <task:scheduled ref="periodicTask" method="execute" cron="${schedule.time.cron}"/>
     </task:scheduled-tasks>
 
 </beans>

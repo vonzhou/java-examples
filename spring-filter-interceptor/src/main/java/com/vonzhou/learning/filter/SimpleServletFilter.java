@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by vonzhou on 16/7/23.
  */
-public class SimpleServletFilter implements Filter{
+public class SimpleServletFilter implements Filter {
     private static Logger logger = Logger.getLogger(SimpleServletFilter.class);
 
     /**
@@ -20,15 +20,35 @@ public class SimpleServletFilter implements Filter{
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String id = request.getParameter("id");
-        logger.info("Request Parameter id : " + id);
-        if(id != null && !id.isEmpty() && id.equals("123")){
-            chain.doFilter(request,response);
+
+        if (meetFilterCondition(request)) {
+            chain.doFilter(request, response);
+        } else {
+            // Reply directly here (1)
+            replyDirectly(response);
         }
 
-        // Reply directly here
-        HttpServletResponse httpResponse = (HttpServletResponse)response;
+        // filter outside  (2)
+        doFilterResponse(response);
+    }
+
+    private void doFilterResponse(ServletResponse response) throws IOException {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.getWriter().println("+++ From Filter, I will also filter the response, sorry");
+    }
+
+    private void replyDirectly(ServletResponse response) throws IOException {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
         httpResponse.getWriter().println("+++ From Filter, Another Page...enjoy");
+    }
+
+    private boolean meetFilterCondition(ServletRequest request) {
+        String id = request.getParameter("id");
+        logger.info("Request Parameter id : " + id);
+        if (id != null && !id.isEmpty() && id.equals("123")) {
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -5,6 +5,6 @@ package com.vonzhou.learn;
  */
 public class PeriodicTask {
     public synchronized void execute() {
-        System.out.println("Hello world");
+        System.out.println("task running...");
     }
 }
