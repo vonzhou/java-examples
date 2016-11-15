@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN" name="MyApp" packages="">
+    <Properties>
+        <Property name="log-path">D:/logs/</Property>
+    </Properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <File name="MyFile" fileName="logs/app.log">
+            <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <RollingFile name="MyRollingFile" fileName="${log-path}/myexample.log"
+                     filePattern="${log-path}/myexample-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-mm-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <!--根据文件大小来触发 rolling file-->
+                <!--<SizeBasedTriggeringPolicy size="1KB"/>-->
+            </Policies>
+        </RollingFile>
+    </appenders>
+
+    <loggers>
+        <Logger name="com.vonzhou.learn" level="all" additivity="false">
+            <AppenderRef ref="MyRollingFile" level="debug"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="Console" level="info"/>
+            <AppenderRef ref="MyFile" level="error"/>
+            <!--<AppenderRef ref="MyRollingFile" level="error"/>-->
+        </Root>
+
+    </loggers>
+</configuration>
