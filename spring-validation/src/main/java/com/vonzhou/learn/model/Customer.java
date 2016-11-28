@@ -20,7 +20,7 @@ public class Customer {
     private String name;
 
     @NotEmpty
-    @Email
+    @Email(message = "电子邮件地址不合法")
     private String email;
 
     @NotNull

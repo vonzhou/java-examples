@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	
+	<!--
+	    dbcp的详细配置说明见http://commons.apache.org/dbcp/configuration.html 
+	    Parameter 	Default 	Description
+		initialSize 	0 	The initial number of connections that are created when the pool is started. Since: 1.2
+		maxActive 	8 	The maximum number of active connections that can be allocated from this pool at the same time, or negative for no limit.
+		maxIdle 	8 	The maximum number of connections that can remain idle in the pool, without extra ones being released, or negative for no limit.
+		minIdle 	0 	The minimum number of connections that can remain idle in the pool, without extra ones being created, or zero to create none.
+		maxWait 	indefinitely 	The maximum number of milliseconds that the pool will wait (when there are no available connections) for a connection to be returned before throwing an exception, or -1 to wait indefinitely.
+		优化：http://agapple.iteye.com/blog/772507
+	 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="10" />        <!-- 初始连接数量 -->
+		<property name="maxActive" value="500" />         <!-- 最大连接数量 -->
+		<property name="maxIdle" value="50" />           <!-- 最大空闲连接数量 -->
+		<property name="minIdle" value="10" />            <!-- 最小空闲连接数量 -->
+		<property name="maxWait" value="180000" />       <!-- 如果程序无法从连接池获得连接，那么超过这个时间之后，程序抛异常 -->
+		
+		<property name="validationQuery" value="SELECT 1" />   <!-- 数据库连接可用性测试语句 -->
+		<property name="testOnBorrow" value="true" />          <!-- 每次获取一个连接的时候，验证一下连接是否可用，语句在validationQuery里面 -->
+		<property name="removeAbandoned" value="true" />       <!-- 自动处理连接未关闭的问题，Setting this to true can recover db connections from poorly written applications which fail to close a connection.  -->
+		<property name="removeAbandonedTimeout" value="300" /> <!-- 连接使用后5分钟未关闭，则抛弃 -->
+		
+		<!-- 每5分钟检查一次，每次检查5个连接，如果连接空闲时间达到5分钟，则认为可以Evict -->
+		<property name="timeBetweenEvictionRunsMillis" value="300000" />
+		<property name="numTestsPerEvictionRun" value="10" />
+		<property name="minEvictableIdleTimeMillis" value="320000" />
+	</bean>
+	
+	<!-- 使用JDBC事物 -->  
+    <bean id="transactionManager"  
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource" />  
+    </bean>
+	
+	<!-- 使用annotation注解方式配置事务 -->  
+    <tx:annotation-driven transaction-manager="transactionManager" />  
+  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <property name="configLocation" value="classpath:mybatis-sqlmap.xml"></property>
+    </bean>  
+  
+    <!-- 配置SQLSession模板 -->  
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">  
+        <constructor-arg index="0" ref="sqlSessionFactory" />  
+    </bean>  
+	
+</beans>
