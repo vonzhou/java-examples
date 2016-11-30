@@ -25,7 +25,8 @@ public class MessageProducer {
          * 用于自举（bootstrapping ），producer只是用它来获得元数据（topic, partition, replicas）
          * 实际用户发送消息的socket会根据返回的元数据来确定
          */
-        props.put("metadata.broker.list", "localhost:9092");
+//        props.put("metadata.broker.list", "localhost:9092");
+        props.put("metadata.broker.list", "10.165.124.132:9092");
         /**
          * 消息的序列化类
          * 默认是 kafka.serializer.DefaultEncoder， 输入时 byte[] 返回是同样的字节数组
@@ -57,6 +58,7 @@ public class MessageProducer {
         KeyedMessage<String, String> data = new KeyedMessage<String, String>(topic, key, msg);
 
         producer.send(data);
+        System.out.println("发送成功！");
     }
 
     public void start() {

@@ -25,7 +25,8 @@ public class MessageConsumer {
 
     public void init(){
         // 指定 zookeeper 的地址
-        String zookeeper = "localhost:2181";
+//        String zookeeper = "localhost:2181";
+        String zookeeper = "10.165.124.132:2181";
         String topic = "test";
         String groupId = "test-group";
 

@@ -13,7 +13,7 @@
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
     <listener>
@@ -26,4 +26,11 @@
             classpath:service-context.xml
         </param-value>
     </context-param>
+
+    <welcome-file-list>
+        <welcome-file>index.do</welcome-file>
+    </welcome-file-list>
+    <session-config>
+        <session-timeout>120</session-timeout>
+    </session-config>
 </web-app>
