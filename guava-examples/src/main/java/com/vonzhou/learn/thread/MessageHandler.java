@@ -27,7 +27,7 @@ public class MessageHandler {
         }
     });
 
-    public void handle(Message msg) {
+    public void handle(final Message msg) {
         try {
             System.out.println(service.getTaskCount());
             System.out.println(service.getQueue().size());

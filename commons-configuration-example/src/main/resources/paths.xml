@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<configuration>
+    <processing stage="qa">
+        <paths>
+            <path>/data/path1</path>
+            <path>/data/otherpath</path>
+            <path>/var/log</path>
+        </paths>
+    </processing>
+</configuration>

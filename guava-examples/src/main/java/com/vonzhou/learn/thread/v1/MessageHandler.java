@@ -12,7 +12,7 @@ public class MessageHandler {
     private ExecutorService service = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
 
 
-    public void handle(Message msg){
+    public void handle(final Message msg){
         try {
             service.execute(new Runnable() {
 

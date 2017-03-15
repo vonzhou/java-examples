@@ -30,6 +30,14 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
         <!--<dependency>-->
         <!--<groupId>commons-pool</groupId>-->
         <!--<artifactId>commons-pool</artifactId>-->

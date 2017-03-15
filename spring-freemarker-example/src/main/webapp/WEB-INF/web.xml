@@ -25,4 +25,5 @@
             /WEB-INF/simple-servlet.xml
         </param-value>
     </context-param>
+
 </web-app>
