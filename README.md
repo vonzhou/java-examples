@@ -4,6 +4,22 @@
 > 最好的参考资料就是官方文档
 
 
+
+TODO:
+
+学习 commons-pool, commons-dbcp
+
+
+
+## Java 基础
+
+* commons-configuration
+
+## Spring框架
+
+
+
+
 ## spring-sapectj
 
 在Spring中使用 @AspectJ注解
